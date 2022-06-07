@@ -1,0 +1,20 @@
+name: "Okteto keep awake"
+on:
+  schedule:
+    - cron: "* 1 * * *"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: context
+        uses: okteto/context@latest
+        with:
+          token: ${{ secrets.OKTETO_TOKEN }}
+      - name: "Activate Namespace"
+        uses: okteto/namespace@latest
+        with:
+          namespace: zekx7
+      - name: "Trigger the pipeline"
+        uses: okteto/pipeline@latest
+        with:
+          name: msgc
